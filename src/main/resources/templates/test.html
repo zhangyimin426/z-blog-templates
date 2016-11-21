@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>index</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<input type="text" name="userName" value="James Carrot" th:value="${name}"/>
+
+<!--
+<div class="panel panel-primary">
+    <div class="panel-heading">hello</div>
+    <div class="panel-body" th:text="${xname}"></div>
+</div>
+<div class="panel panel-warning">
+    <div class="panel-heading">hello</div>
+    <div id="usernamediv" class="panel-body"></div>
+</div>
+
+<script th:inline="javascript">
+    $(function () {
+        $.ajax({
+            url: "/thymeleaf/ajax",
+            data: {
+                username: "xxx"
+            },
+            type: "get",
+            dataType: "text",
+            success: function (text) {
+                alert(text);
+                $("#usernamediv").text(text);
+            }
+        });
+    });
+</script>
+
+-->
+</body>
+</html>

@@ -4,6 +4,7 @@ import com.zym.blog.model.Blog;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -31,5 +32,13 @@ public class TestController {
     public String helloJsp(Map<String, Object> map) {
         map.put("hello", appName);
         return "/hello.jsp";
+    }
+
+    @RequestMapping("/test")
+    public ModelAndView index2(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("test");
+        modelAndView.addObject("name", "zhangyiminowen");
+        return modelAndView;
     }
 }

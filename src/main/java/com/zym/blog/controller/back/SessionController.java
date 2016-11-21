@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,7 +36,7 @@ import java.util.List;
  * @date 2016-10-09
  */
 @RestController
-@RequestMapping("/session")
+@RequestMapping("session")
 public class SessionController {
 
     @Autowired
@@ -57,8 +58,8 @@ public class SessionController {
      * @param request   请求
      * @return
      */
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public Object login(String loginName, String password, HttpServletRequest request) {
+    @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
+    public Object toLogin(String loginName, String password, HttpServletRequest request) {
 
         //查询帐号信息
         Admin adminResult = adminService.getByLoginName(loginName);
@@ -76,18 +77,13 @@ public class SessionController {
         request.getSession().setAttribute(BaseConstant.ADMIN_SESSION, adminResult);
         request.getSession().setAttribute(BaseConstant.ADMIN_RIGHT, menuRightDtos);
 
-        AdminInfoDto infoDto = new AdminInfoDto();
-        infoDto.setSessionId(request.getSession().getId());
-        infoDto.setAdmin(adminResult);
-        infoDto.setMenuRightDtos(menuRightDtos);
-
         log.info("-------zblog-------write：session_id:" + request.getSession().getId());
         try {
             recordLoginHistory(request, adminResult.getAdminId());
         } catch (Exception e) {
             log.info("账号【" + loginName + "】记录登录日志失败", e);
         }
-        return JsonResult.success(infoDto);
+        return JsonResult.success();
     }
 
     /**
@@ -110,21 +106,9 @@ public class SessionController {
      * @param session 会话
      * @return
      */
-    @RequestMapping(value = "", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/session/logout")
     public Object logout(HttpSession session) {
         session.removeAttribute(BaseConstant.ADMIN_SESSION);
-        return JsonResult.success();
-    }
-
-    @RequestMapping(value = "/id", method = RequestMethod.GET)
-    public Object checkSession(String sessionId, HttpServletRequest request) {
-        if (StringUtil.isEmpty(sessionId)) {
-            return JsonResult.fail(GlobalResultStatus.USER_LOGIN_SESSION_TIME_OUT);
-        }
-        String sid = request.getSession().getId();
-        if (!sessionId.equals(sid)) {
-            return JsonResult.fail(GlobalResultStatus.USER_LOGIN_SESSION_TIME_OUT);
-        }
         return JsonResult.success();
     }
 }

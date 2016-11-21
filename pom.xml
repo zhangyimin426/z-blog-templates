@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.zym</groupId>
-    <artifactId>z-blog-jsp</artifactId>
+    <artifactId>z-blog-templates</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>z-blog Maven Webapp</name>
+    <name>z-blog-templates Maven Webapp</name>
 
     <!-- 继承父包 -->
     <parent>
@@ -95,6 +95,19 @@
             <version>${spring.boot.version}</version>
         </dependency>
 
+        <!-- 添加Thymeleaf模板引擎 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- 热部署 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- mysql驱动 -->
         <dependency>
             <groupId>mysql</groupId>
@@ -140,7 +153,6 @@
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -159,6 +171,18 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <!--fork :  如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
+                    <fork>true</fork>
+                </configuration>
+                <dependencies>
+                    <!-- spring热部署-->
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.6.RELEASE</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
 

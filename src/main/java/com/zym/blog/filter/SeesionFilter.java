@@ -7,6 +7,8 @@ import com.zym.blog.statuscode.GlobalResultStatus;
 import com.zym.blog.utils.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -14,13 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * session管理（使用注解标注过滤器）
- * @WebFilter将一个实现了javax.servlet.Filter接口的类定义为过滤器 属性filterName声明过滤器的名称, 可选
- * 属性urlPatterns指定要过滤的URL模式,也可使用属性value来声明.(指定要过滤的URL模式是必选属性)
  *
  * @author Gavin
+ * @WebFilter将一个实现了javax.servlet.Filter接口的类定义为过滤器 属性filterName声明过滤器的名称, 可选
+ * 属性urlPatterns指定要过滤的URL模式,也可使用属性value来声明.(指定要过滤的URL模式是必选属性)
  * @date 2016-10-17
  */
 
@@ -37,29 +42,48 @@ public class SeesionFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-
         String url = request.getRequestURI();
+        String contentPath = request.getContextPath();
         HttpSession session = request.getSession();
-        log.info(url);
+
         Admin admin = (Admin) session.getAttribute(BaseConstant.ADMIN_SESSION);
+
         log.info("-------zblog-------read：session_id:" + request.getSession().getId());
+
         if (admin != null) {
             log.info("Admin:" + admin.toString());
-        }
-        if (!url.contains("session")) {
-            if (admin == null) {
-                log.debug("-------zblog-------admin is null:" + request.getSession().getId());
-                writeResponse(response, JsonResult.fail(GlobalResultStatus.USER_LOGIN_SESSION_TIME_OUT));
+        } else {
+            log.debug("-------zblog-------admin is null:" + request.getSession().getId());
+            if (!checkFilterUrls(url, contentPath) && !url.endsWith("login")) {
+                log.info("拦截的url：" + url);
+                response.sendRedirect(contentPath + "/login");
                 return;
             }
         }
         chain.doFilter(request, response);
+    }
+
+    /**
+     * 检查是否需要放过的资源
+     *
+     * @param requestUrl  请求的url
+     * @param contentPath 上下文
+     * @return
+     */
+    public boolean checkFilterUrls(String requestUrl, String contentPath) {
+        /**
+         * 增加非过滤的url，主要是静态资源
+         */
+        List<String> urls = new ArrayList<String>();
+        urls.add(contentPath + "/zblog");
+        urls.add(contentPath + "/login");
+        urls.add(contentPath + "/session");
+        for (String url : urls) {
+            if (requestUrl.startsWith(url)) {
+                return true;//true放过
+            }
+        }
+        return false;
     }
 
     private void writeResponse(HttpServletResponse response, Object result) {
@@ -75,4 +99,5 @@ public class SeesionFilter implements Filter {
     public void destroy() {
         log.info("摧毁session过滤器");
     }
+
 }

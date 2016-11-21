@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>『zblog』后台管理</title>
+    <link href="" th:href="@{/zblog/css/admin_login.css}" rel="stylesheet" type="text/css"/>
+    <script src="js/libs/jquery.min.js" th:src="@{/zblog/js/libs/jquery.min.js}"></script>
+    <script src="js/libs/jquery.md5.js" th:src="@{/zblog/js/libs/jquery.md5.js}"></script>
+</head>
+<body>
+<div class="admin_login_wrap">
+    <h1>后台管理</h1>
+    <div class="adming_login_border">
+        <div class="admin_input">
+            <form id="loginForm">
+                <ul class="admin_items">
+                    <li>
+                        <label for="loginName">用户名：</label>
+                        <input type="text" name="loginName" value="admin" id="loginName" size="40"
+                               class="admin_input_style"/>
+                    </li>
+                    <li>
+                        <label for="password">密码：</label>
+                        <input type="password" name="password" value="123456" id="password" size="40"
+                               class="admin_input_style"/>
+                    </li>
+                    <li>
+                        <input type="button" tabindex="3" value="登录" id="loginBtn" class="btn btn-primary"/>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="admin_register">
+            <a href="javasript:;">立即注册</a>
+        </div>
+    </div>
+    <p class="admin_copyright"><a tabindex="5" href="http://www.google.com/" target="_blank">返回首页</a> &copy; 2016
+        Powered
+        by <a href="https://github.com/zhangyimin426" target="_blank">ZhangYimin</a></p>
+</div>
+<script type="text/javascript" src="js/login/login.js" th:src="@{zblog/js/login/login.js}"></script>
+</body>
+</html>

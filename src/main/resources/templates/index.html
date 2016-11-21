@@ -1,0 +1,26 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>『zblog』后台管理</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/zblog/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/zblog/css/main.css}"/>
+
+    <script src="js/libs/modernizr.min.js" th:src="@{/zblog/js/libs/modernizr.min.js}"></script>
+    <script src="js/libs/jquery.min.js" th:src="@{/zblog/js/libs/jquery.min.js}"></script>
+    <script src="js/libs/jquery.md5.js" th:src="@{/zblog/js/libs/jquery.md5.js}"></script>
+
+</head>
+<body>
+<!-- 引入顶部 -->
+<div th:include="common/top"></div>
+
+<div class="container clearfix">
+    <!-- 引入左侧菜单 -->
+    <div th:include="common/menu"></div>
+
+    <!-- 引入首次内容模块 -->
+    <div id="content" th:include="common/content"></div>
+</div>
+</body>
+</html>
