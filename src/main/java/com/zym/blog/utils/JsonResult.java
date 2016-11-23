@@ -2,8 +2,8 @@ package com.zym.blog.utils;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.github.pagehelper.Page;
-import com.zym.blog.statuscode.GlobalResultStatus;
-import com.zym.blog.statuscode.ResultStatus;
+import com.zym.blog.constant.statuscode.GlobalResultStatus;
+import com.zym.blog.constant.statuscode.ResultStatus;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;

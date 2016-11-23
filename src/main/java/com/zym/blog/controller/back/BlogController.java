@@ -1,5 +1,6 @@
 package com.zym.blog.controller.back;
 
+import com.zym.blog.controller.BaseController;
 import com.zym.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,13 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RestController
 @RequestMapping("/article")
-public class BlogController {
+public class BlogController extends BaseController {
     @Autowired
     private BlogService blogService;
 
     @RequestMapping("/list")
     public ModelAndView getList() {
-        return new ModelAndView("blog/list");
+
+        ModelAndView modelAndView = new ModelAndView("blog/list");
+
+
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "/{blogId}", method = RequestMethod.GET)

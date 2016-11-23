@@ -1,24 +1,22 @@
 package com.zym.blog.controller.back;
 
+import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.zym.blog.constant.BaseConstant;
-import com.zym.blog.dto.AdminInfoDto;
-import com.zym.blog.dto.AdminMenuRightDto;
+import com.zym.blog.controller.BaseController;
+import com.zym.blog.domain.dto.AdminMenuRightDto;
 import com.zym.blog.model.Admin;
 import com.zym.blog.model.AdminLoginHistory;
 import com.zym.blog.service.AdminLoginHistoryService;
 import com.zym.blog.service.AdminService;
 import com.zym.blog.service.RightService;
-import com.zym.blog.statuscode.GlobalResultStatus;
+import com.zym.blog.constant.statuscode.GlobalResultStatus;
 import com.zym.blog.utils.DateUtil;
 import com.zym.blog.utils.JsonResult;
 import com.zym.blog.utils.RequestUtil;
-import com.zym.blog.utils.StringUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +35,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("session")
-public class SessionController {
+public class SessionController extends BaseController {
 
     @Autowired
     private AdminService adminService;
@@ -55,7 +53,7 @@ public class SessionController {
      *
      * @param loginName 登录用户名
      * @param password  密码
-     * @param request   请求
+     * @param request   http请求
      * @return
      */
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
@@ -69,7 +67,7 @@ public class SessionController {
 
         //检查密码安全
         if (!DigestUtils.md5Hex(password).equals(adminResult.getPassword())) {
-            return JsonResult.fail(GlobalResultStatus.PASSWORD_ERROR);
+            return JsonResult.fail(GlobalResultStatus.USER_LOGIN_FAILED);
         }
 
         List<AdminMenuRightDto> menuRightDtos = rightService.getByAdminId(adminResult.getAdminId());

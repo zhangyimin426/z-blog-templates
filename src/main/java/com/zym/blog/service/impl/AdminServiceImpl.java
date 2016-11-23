@@ -2,7 +2,7 @@ package com.zym.blog.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.zym.blog.dao.AdminDao;
-import com.zym.blog.form.AdminForm;
+import com.zym.blog.domain.form.AdminForm;
 import com.zym.blog.model.Admin;
 import com.zym.blog.model.example.AdminExample;
 import com.zym.blog.service.AdminService;

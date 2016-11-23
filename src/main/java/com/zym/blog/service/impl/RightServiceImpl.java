@@ -1,8 +1,8 @@
 package com.zym.blog.service.impl;
 
 import com.zym.blog.dao.RightMapper;
-import com.zym.blog.dto.AdminMenuRightDto;
-import com.zym.blog.form.RightForm;
+import com.zym.blog.domain.dto.AdminMenuRightDto;
+import com.zym.blog.domain.form.RightForm;
 import com.zym.blog.model.Right;
 import com.zym.blog.service.RightService;
 import org.springframework.beans.factory.annotation.Autowired;

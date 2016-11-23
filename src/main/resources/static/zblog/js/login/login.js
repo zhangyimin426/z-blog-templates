@@ -56,7 +56,7 @@ var login = function () {
             if (data.code == 0) {
                 window.location.href = "index";
             }else {
-                alert(JSON.stringify(data));
+                alert(JSON.stringify(data.msg));
             }
         },
         error: function () {

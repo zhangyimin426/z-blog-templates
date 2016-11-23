@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>后台管理</title>
+    <title>『zblog』后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/zblog/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/zblog/css/main.css}"/>
     <script src="js/libs/modernizr.min.js" th:src="@{/zblog/js/libs/modernizr.min.js}"></script>
@@ -13,6 +13,9 @@
 <div th:include="common/top"></div>
 
 <div class="container clearfix">
+
+    <!-- 引入左侧菜单 -->
+    <div th:include="common/menu"></div>
 
     <div class="main-wrap">
 
@@ -43,7 +46,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="insert.html"><i class="icon-font"></i>新增作品</a>
+                        <a href="insert.html"><i class="icon-font"></i>新增博客</a>
                         <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
                         <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                     </div>

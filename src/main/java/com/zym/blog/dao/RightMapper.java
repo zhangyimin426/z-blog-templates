@@ -1,6 +1,6 @@
 package com.zym.blog.dao;
 
-import com.zym.blog.dto.AdminMenuRightDto;
+import com.zym.blog.domain.dto.AdminMenuRightDto;
 import com.zym.blog.model.Right;
 import java.util.List;
 

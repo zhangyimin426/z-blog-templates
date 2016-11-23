@@ -3,12 +3,8 @@ package com.zym.blog.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zym.blog.constant.BaseConstant;
 import com.zym.blog.model.Admin;
-import com.zym.blog.statuscode.GlobalResultStatus;
-import com.zym.blog.utils.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -16,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +73,7 @@ public class SeesionFilter implements Filter {
         urls.add(contentPath + "/zblog");
         urls.add(contentPath + "/login");
         urls.add(contentPath + "/session");
+        urls.add(contentPath + "/test");
         for (String url : urls) {
             if (requestUrl.startsWith(url)) {
                 return true;//true放过

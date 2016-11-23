@@ -1,7 +1,7 @@
 package com.zym.blog.service;
 
 
-import com.zym.blog.form.BlogForm;
+import com.zym.blog.domain.form.BlogForm;
 import com.zym.blog.model.Blog;
 
 import java.util.List;

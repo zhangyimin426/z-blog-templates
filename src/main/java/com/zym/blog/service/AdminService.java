@@ -1,6 +1,6 @@
 package com.zym.blog.service;
 
-import com.zym.blog.form.AdminForm;
+import com.zym.blog.domain.form.AdminForm;
 import com.zym.blog.model.Admin;
 
 import java.util.List;

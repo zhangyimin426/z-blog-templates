@@ -13,9 +13,9 @@ import java.util.Map;
  * @date 2016-09-01
  */
 @RestController
-public class TestController {
+public class TestController extends BaseController {
 
-    @Value("${application.appName}")
+    @Value("${spring.application.name}")
     private String appName;
 
     @RequestMapping("/")
